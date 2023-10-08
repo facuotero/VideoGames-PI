@@ -1,0 +1,63 @@
+/* Estilo para la tarjeta */
+.card {
+    width: 100%;
+    max-width: 600px; /* Ancho máximo de la tarjeta */
+    margin: 0 auto; /* Centra la tarjeta horizontalmente */
+    padding: 20px;
+    border: 2px solid #2cd5cc65;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+    text-align: center;
+    background-color:  rgba(116, 27, 180, 0.406);
+  }
+  
+  /* Estilo para la imagen */
+  .card img {
+    max-width: 100%; /* Ajusta el tamaño de la imagen al ancho de la tarjeta */
+    height: auto; /* Altura automática para mantener la proporción */
+    border-radius: 10px; /* Bordes redondeados para la imagen */
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+    border: 2px solid #2cd5cc65;
+
+  }
+  
+  /* Estilo para el nombre */
+  .card h2 {
+    font-size: 24px;
+    margin: 10px 0;
+    
+  }
+  
+  /* Estilo para el rating */
+  .card .rating {
+    font-size: 18px;
+    color: #ff9900; /* Color del rating */
+  }
+  
+  /* Estilo para la descripción */
+  .card p.description {
+    font-size: 16px;
+    line-height: 1.0;
+    margin: 0; /* Elimina el margen predeterminado para un aspecto más limpio */
+    padding: 10px; /* Agrega un espacio de relleno para un mejor espaciado */
+    border: 2px solid #2cd5cc65;
+    /* Agrega un borde para destacar la descripción */
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+    border-radius: 10px;
+    background-color:  rgba(94, 23, 144, 0.375);
+  }
+  .detailTitle{
+    text-align: center;
+  }
+  .loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+  }
+  .platforms{
+    font-size: 14px;
+    margin-bottom: 5px;
+    line-height: 1.5;
+
+  }

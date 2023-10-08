@@ -1,0 +1,51 @@
+/* .card {
+    border: 1px solid black;
+    width: calc(25% - 1em); /* Ancho para mostrar 4 cartas por fila con un espacio de 1em entre ellas */
+    /* max-width: 300px; /* Ancho máximo de cada carta */
+    /* border-radius: 10px;
+    margin-right: 1em; /* Espacio derecho entre las cartas (puedes ajustarlo según tus necesidades) */
+    /* margin-bottom: 1em; /* Espacio inferior entre las cartas (puedes ajustarlo según tus necesidades) */
+  /* } */ 
+  .card {
+    width: 200px; /* Ancho máximo de cada tarjeta */
+    border: 10px solid rgba(0, 255, 255, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+    
+    background-color: rgba(0, 255, 128, 0.309);
+    /* Agrega puntos suspensivos (...) cuando el texto se desborda */
+    overflow: hidden; /* Oculta cualquier texto que desborde el ancho de la tarjeta */
+    text-overflow: ellipsis;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.7); /* Establece la sombra estilo "neón" */
+    transition: box-shadow 0.3s ease;
+  }
+  .card:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.7); /* Cambia la sombra al pasar el cursor sobre la tarjeta */
+    transform: scale(1.05);  
+}
+
+  .name{
+    font-size: 14px;
+    text-align: center;
+    
+    
+  }
+  .genres{
+    font-size: 11px;
+    text-align: center;
+    
+  }
+  
+  .imgCard {
+    width: 100%; /* Ajusta el ancho de la imagen al 100% de la tarjeta */
+    height: 200px; /* Altura máxima de la imagen */
+    object-fit: cover; /* Ajusta la imagen para que cubra todo el espacio disponible */
+    border-radius: 10px;
+  }
+  
+  @media (min-width: 768px) {
+    .card {
+      max-width: none; /* Ancho máximo de cada tarjeta cuando se muestra en computadoras */
+      max-width: calc(25% - 20px); /* Ancho máximo de cada tarjeta para mostrar 4 tarjetas por fila con un espacio de 20px entre ellas */
+    }
+  }

@@ -8,7 +8,7 @@ const findAllGenres = async () => {
   const dbGenres = await Genre.findAll();
   if (!dbGenres.length) {
     const { data } = await axios(`https://api.rawg.io/api/genres${apiKey}`);
-    const genresToSave = data.results.map((genre) => ({ name: genre.name }));
+    const genresToSave = data.results.map((genre) => ({ name: genre.name }));// Se guarde sólo el nombre
     await Genre.bulkCreate(genresToSave);
   }
   const dbGenresFull = await Genre.findAll();

@@ -3,7 +3,7 @@ const axios = require("axios");
 require("dotenv").config();
 const { API_KEY } = process.env;
 const apiKey = `?key=${API_KEY}`;
-const { cleanArray, cleanObject } = require("../utils/index");
+const { cleanArray} = require("../utils/index");
 const { Op } = require("sequelize");
 const db = require("../db");
 //Creamos el controller para que interactue con el modelo
@@ -70,10 +70,12 @@ const createGame = async (game) => {
   if (existingGame)
     throw new Error(`A game called: ${game.name} already exists`);
 
+  
+
   const genresSaved = await Genre.findAll({
     where: { name: game.genres },
   });
-
+console.log(game.genres)
   const newGame = await Videogame.create({
     name: game.name,
     description: game.description,
