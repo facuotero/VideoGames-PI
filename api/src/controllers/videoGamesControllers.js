@@ -3,7 +3,7 @@ const axios = require("axios");
 require("dotenv").config();
 const { API_KEY } = process.env;
 const apiKey = `?key=${API_KEY}`;
-const { cleanArray} = require("../utils/index");
+const { cleanArray, cleanGenres } = require("../utils/index");
 const { Op } = require("sequelize");
 const db = require("../db");
 //Creamos el controller para que interactue con el modelo
@@ -17,29 +17,65 @@ const findAllVideogames = async () => {
     include: { model: Genre, attribute: ["name"] },
   });
 
-  const { data } = await axios(`https://api.rawg.io/api/games${apiKey}`);
-  const videogames = data.results;
-  const apiVideogames = cleanArray(videogames);
+  const videogamesNeeded = 100;
+  const apiGames = [];
+  
+  while(apiGames.length < videogamesNeeded){
 
-  if (!videogames && !dbVideogames)
-    throw Error("We couldn't find any videogame");
+    const { data } = await axios(`https://api.rawg.io/api/games${apiKey}`);
+    const videogames = data.results;
 
-  return [...dbVideogames, ...apiVideogames];
+    if (!videogames.length && !dbVideogames){
+
+      throw Error("We couldn't find any videogame");
+    }
+    
+    const apiVideogames = cleanArray(videogames);
+    apiGames.push(...apiVideogames)
+
+  }
+  
+
+  return [...dbVideogames, ...apiGames];
 };
 
-const findById = async (id) => {
-  if (isNaN(id)) {
+const findById = async (id, source) => {
+  if (source === "db") {
     let dbGame = await Videogame.findByPk(id, {
       include: { model: Genre, attribute: ["name"] },
     });
-    if (dbGame) return dbGame;
+    if (dbGame) {
+      dbGame.toJSON();//Por qué?
+      return {
+        id: dbGame.id,
+        name: dbGame.name,
+        platforms: dbGame.platforms,
+        genres: dbGame.Genres?.map(genre => genre.name),
+        image: dbGame.image,
+        released: dbGame.released,
+        description: dbGame.description,
+        created: true
+      };
+    }
     throw Error(`We could't find any game with this ID: ${id}`);
+  } else {
+    const { data } = await axios(
+      `https://api.rawg.io/api/games/${id}${apiKey}`
+    );
+    let gameApi = data;
+    if (!gameApi) throw Error(`We could't find any game with this ID: ${id}`);
+    return {
+      id: gameApi.id,
+      name: gameApi.name,
+      platforms: gameApi.platforms.map((platform) => platform.platform.name),
+      genres: gameApi.genres.map((genre) => genre.name),
+      image: gameApi.background_image,
+      released: gameApi.released,
+      rating: gameApi.rating,
+      description: gameApi.description,
+      created: false,
+    };
   }
-
-  const { data } = await axios(`https://api.rawg.io/api/games/${id}${apiKey}`);
-  let gameApi = data;
-  if (!gameApi) throw Error(`We could't find any game with this ID: ${id}`);
-  return cleanArray([gameApi]);
 };
 
 const findByName = async (name) => {
@@ -49,7 +85,9 @@ const findByName = async (name) => {
     },
     limit: 15,
   });
-  const { data } = await axios(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`);
+  const { data } = await axios(
+    `https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`
+  );
   let apiGame = data.results;
   let apiGameCleaned = cleanArray(apiGame);
 
@@ -70,12 +108,10 @@ const createGame = async (game) => {
   if (existingGame)
     throw new Error(`A game called: ${game.name} already exists`);
 
-  
-
   const genresSaved = await Genre.findAll({
     where: { name: game.genres },
   });
-console.log(game.genres)
+  console.log(game.genres);
   const newGame = await Videogame.create({
     name: game.name,
     description: game.description,

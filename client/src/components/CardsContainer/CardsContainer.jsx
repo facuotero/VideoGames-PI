@@ -15,12 +15,11 @@ const CardsContainer = () => {
            <Card 
            key={game.id}
            id={game.id}
-           image={game.background_image}
+           image={game.image}
            name={game.name} 
            genres={game.genres}
             />
             ))}
-      
     </div>
   );
 };

@@ -8,11 +8,11 @@
   /* } */ 
   .card {
     width: 200px; /* Ancho máximo de cada tarjeta */
-    border: 10px solid rgba(0, 255, 255, 0.5);
+    border: 10px solid #065a60;
     border-radius: 10px;
     padding: 10px;
     
-    background-color: rgba(0, 255, 128, 0.309);
+    background-color:  #065a60;
     /* Agrega puntos suspensivos (...) cuando el texto se desborda */
     overflow: hidden; /* Oculta cualquier texto que desborde el ancho de la tarjeta */
     text-overflow: ellipsis;
