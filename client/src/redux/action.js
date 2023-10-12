@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const GET_ALL_GAMES = "GET_ALL_GAMES";
-export const GET_GAME_BY_NAME = "GET_GAME_BY_ID";
+export const GET_GAME_BY_NAME = "GET_GAME_BY_NAME";
 export const PAGINATE = "PAGINATE";
 export const FILTER_BY_SOURCE = "FILTER_BY_SOURCE";
 export const GENRE_FILTER = "GENRE_FILTER";

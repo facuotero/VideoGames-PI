@@ -111,7 +111,7 @@ const findByName = async (name) => {
   let apiGameCleaned = cleanArray(apiGame);
 
   let apiFiltered = apiGameCleaned.filter(
-    (game) => game.name.toLowerCase() === name.toLowerCase()
+    (game) => game.name.toLowerCase().includes(name.toLowerCase())
   );
 
   if (!apiFiltered.length && !dbGame.length)

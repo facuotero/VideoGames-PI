@@ -114,11 +114,13 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case GET_GAME_BY_NAME:
-      return {
-        ...state,
-        games: action.payload,
-      };
-
+    return{
+      ...state,
+      games: [...action.payload].splice(0, games_per_page), //splice para mantener con el paginado
+      gamesFiltered: action.payload, //va a tener un backup de los juegos filtrados
+      filter: true,
+    }
+    
     default:
       return { ...state };
   }
