@@ -18,6 +18,7 @@ const CardsContainer = () => {
            image={game.image}
            name={game.name} 
            genres={game.genres}
+           created = {game.created}
             />
             ))}
     </div>

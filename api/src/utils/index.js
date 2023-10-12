@@ -16,34 +16,28 @@ const cleanArray = (dbGame) =>
       image: game.background_image,
       released: game.released,
       description: game.description,
-      created: true
+      created: false,
     };
   });
   
-const cleanGenres = (arr) => {
-return arr.map((game) => {
-  const formattedGame = game.toJSON();
-  formattedGame.genres = game.Genre.map((genre) => genre.name);
-  delete formattedGame.Genres;
-  return formattedGame;
-})}
-
- const cleanObject = (game) => {
+ const cleanDbGenres = (videogame) => {
+  videogame.map((game) => {
+  const superClean = game.genres.map((g)=> g.name)
   return {
     id: game.id,
     name: game.name,
     platforms: game.platforms,
-    genres: game.Genre?.map(genre => genre.name),
+    genres: superClean,
     image: game.image,
     released: game.released,
     description: game.description,
     created: true
   }
- }
- 
+ })}
+
+
 module.exports = {
   cleanArray,
-  cleanObject,
   cleanDescription,
-  cleanGenres
+  cleanDbGenres
 };

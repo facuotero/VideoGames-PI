@@ -3,7 +3,7 @@ const axios = require("axios");
 require("dotenv").config();
 const { API_KEY } = process.env;
 const apiKey = `?key=${API_KEY}`;
-const { cleanArray, cleanGenres } = require("../utils/index");
+const { cleanArray} = require("../utils/index");
 const { Op } = require("sequelize");
 const db = require("../db");
 //Creamos el controller para que interactue con el modelo
@@ -13,16 +13,19 @@ const db = require("../db");
 //Necesito un catch bien posicionado para manejar el error bien.
 //throw error busca el catch más cercano.
 const findAllVideogames = async () => {
+  //!BDD
   const dbVideogames = await Videogame.findAll({
     include: { model: Genre, attribute: ["name"] },
   });
 
   const videogamesNeeded = 100;
   const apiGames = [];
+  let currentPage = 1;
   
+  //!API
   while(apiGames.length < videogamesNeeded){
 
-    const { data } = await axios(`https://api.rawg.io/api/games${apiKey}`);
+    const { data } = await axios(`https://api.rawg.io/api/games${apiKey}&page=${currentPage}`);
     const videogames = data.results;
 
     if (!videogames.length && !dbVideogames){
@@ -32,11 +35,26 @@ const findAllVideogames = async () => {
     
     const apiVideogames = cleanArray(videogames);
     apiGames.push(...apiVideogames)
-
+    currentPage++;
   }
-  
+  //!LIMPIEZA
+  const dbGamesCleaned = dbVideogames.map((game) => {
+    const superClean = game.genres.map((g)=> g.name)
+    return {
+      id: game.id,
+      name: game.name,
+      platforms: game.platforms,
+      genres: superClean,
+      image: game.image,
+      released: game.released,
+      description: game.description,
+      created: true,
+    };
+    }
+  );
 
-  return [...dbVideogames, ...apiGames];
+  //!TODOS
+  return [...dbGamesCleaned, ...apiGames];
 };
 
 const findById = async (id, source) => {
@@ -53,6 +71,7 @@ const findById = async (id, source) => {
         genres: dbGame.Genres?.map(genre => genre.name),
         image: dbGame.image,
         released: dbGame.released,
+        rating: dbGame.rating,
         description: dbGame.description,
         created: true
       };

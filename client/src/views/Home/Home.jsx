@@ -1,23 +1,78 @@
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getAllGames } from "../../redux/action";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  genreFilter,
+  getAllGames,
+  getGenres,
+  paginateVideogames,
+  orderCriteria,
+  filterBySource,
+} from "../../redux/action";
+import style from "./home.module.css"
 
 const Home = () => {
+  //cuando se monta, que haga el dispatch
+  const dispatch = useDispatch();
+  const genres = useSelector((state) => state.genres);
 
-//cuando se monta, que haga el dispatch
-const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getGenres());
+    dispatch(getAllGames());
+  }, [dispatch]);
 
-useEffect(() => {
-dispatch(getAllGames())
-},[dispatch])
+  // const paginate = (event) => {
+  // dispatch(paginateVideogames(event.target.name));
+  // }
+  const paginate = (event) => {
+    dispatch(paginateVideogames(event.target.name));
+  };
+
+  const filterByGenres = (event) => {
+    dispatch(genreFilter(event.target.value));
+  };
+
+  const orderGames = (event) => {
+    dispatch(orderCriteria(event.target.value))
+  }
+
+  const sourceFilter = (event) => {
+    dispatch(filterBySource(event.target.value))
+  }
 
   return (
-        <>
-          <h1>Esta es la vista de Home</h1>
-          <CardsContainer/>
-        </>
-    )
-}
+    <div>
+      <div className={style.filters}>
+        <select onClick={sourceFilter} className={style.filters}>
+          <option value="db">DB</option>
+          <option value="api">API</option>
+          <option value="all">ALL</option>
+        </select>
+        <select onClick ={orderGames}>
+         <option value="rating">{"★"}</option>
+         <option value="asc">A-Z</option>
+         <option value="desc">Z-A</option>
+        </select>
+        <select onChange={filterByGenres} name="genres"> {/*Por genero*/}
+          {genres.map((genre) => (
+            <option key={genre.id} value={genre.name}>
+              {genre}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <button onClick={paginate} name="prev">
+          Prev
+        </button>{" "}
+        <button onClick={paginate} name="next">
+          Next
+        </button>
+      </div>
+      <h1>Rawg Videogames</h1>
+      <CardsContainer />
+    </div>
+  );
+};
 
 export default Home;

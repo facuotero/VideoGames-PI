@@ -43,7 +43,7 @@ const Detail = () => {
           </p>
           <p>{game.genres}</p>
           <p>{game.released}</p>
-          <p className={style.rating}>{game.rating}</p>
+          <p className={style.rating}>{"★"}{game.rating}</p>
           <p className={style.description}>
             {cleanDescription(game.description)}
           </p>

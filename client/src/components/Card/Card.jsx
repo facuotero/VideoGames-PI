@@ -5,7 +5,7 @@ import {Link, useNavigate} from "react-router-dom"
 
 // eslint-disable-next-line react/prop-types
 const Card = ({id,name,genres,image}) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className={style.card}>
       <Link to={`/detail/${id}`}>

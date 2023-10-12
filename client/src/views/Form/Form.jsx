@@ -94,6 +94,27 @@ const Form = () => {
     });
   };
 
+  // const disabledButton = () => {
+  //   let disabledAux = true;
+  //   for(let key in errors){
+  //     if(errors[key] === ""){
+  //       disabledAux = false;
+  //     }else{
+  //       disabledAux = true;
+  //       break;
+  //     }
+  //   }
+  //   return disabledAux;
+  // }
+
+  const removeGenre = (genre) => {//*para eliminar un genero*/
+  let genresAux = form.genres.filter((g) => g !== genre);
+  setForm({
+    ...form,
+    genres: genresAux,
+});
+};
+
   //El estado global redux no tiene participacion en la operación
   const submitHandler = (event) => {
     event.preventDefault(); //para evitar que se me haga un submit por defecto
@@ -103,7 +124,7 @@ const Form = () => {
         console.log(res.data);
         alert("Creado correctamente");
       })
-      .catch((error) => alert(error.message));
+      .catch(() => alert("Error al crear el videojuego"));
   };
 
   return (
@@ -169,7 +190,13 @@ const Form = () => {
           </option>
         ))}
       </select>
-      {form.genres && <span>{form.genres}</span>}
+      {form.genres && <span>{form.genres.map((genreToRemove) =>(
+        <span key={genreToRemove} className={style.genres}>
+          {genreToRemove}
+          <button type="button" onClick={() => removeGenre(genreToRemove)}>X</button>
+        </span>
+      )
+      )}</span>}
 
       <label className={style.label}>Description:</label>
       <textarea
@@ -181,7 +208,7 @@ const Form = () => {
         name="description"
       ></textarea>
 
-      <button type="submit" className={style.create}>
+      <button type="submit" className={style.create} disabled={Object.values(errors).some((error) => error)}>
         Create
       </button>
     </form>
