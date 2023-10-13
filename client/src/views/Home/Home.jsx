@@ -13,7 +13,6 @@ import {
 import style from "./home.module.css";
 
 const Home = () => {
-  //cuando se monta, que haga el dispatch
   const dispatch = useDispatch();
   const genres = useSelector((state) => state.genres);
 

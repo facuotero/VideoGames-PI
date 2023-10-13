@@ -13,8 +13,8 @@ const initialState = {
   games: [],
   genres: [],
   gamesBackup: [],
-  gamesFiltered: [], //creamos esta propiedad para facilitar la combinacion de filtros y ordenamientos y searchbar
-  filter: false, //dice al programa si hay o no filtros aplicados
+  gamesFiltered: [],
+  filter: false, 
   currentPage: 0,
 };
 
@@ -44,34 +44,33 @@ const rootReducer = (state = initialState, action) => {
           ? next_page * games_per_page
           : prev_page * games_per_page;
       
-      //!COMBINAMOS FILTROS CON PAGINADO
-      if(state.filter){ //si el estado está filtrado
-        if(action.payload ==="next" && first_index >= state.gamesFiltered.length) return state; //corte cuando voy para next
+      if(state.filter){ 
+        if(action.payload ==="next" && first_index >= state.gamesFiltered.length) return state; 
         else if(action.payload === "prev" && prev_page < 0) return state;
         
         return {
           ...state,
-          games: [...state.gamesFiltered].splice(first_index, games_per_page), //le decimos donde queremos que empiece a hacer el splice y hasta donde quermeo sque lo haga (cantidad de items x page)
-          currentPage: action.payload === "next"? next_page : prev_page, //si toco en el Boton next, mi current page va a ser la siguiente porque voy para adelante, sino la de atras
+          games: [...state.gamesFiltered].splice(first_index, games_per_page), 
+          currentPage: action.payload === "next"? next_page : prev_page, 
         }
       }
 
-      if(action.payload ==="next" && first_index >= state.gamesBackup.length) return state; //corte cuando voy para next
+      if(action.payload ==="next" && first_index >= state.gamesBackup.length) return state; 
       else if(action.payload === "prev" && prev_page < 0) return state;
       
 
       return {
         ...state,
-        games: [...state.gamesBackup].splice(first_index, games_per_page), //le decimos donde queremos que empiece a hacer el splice y hasta donde quermeo sque lo haga (cantidad de items x page)
-        currentPage: action.payload === "next"? next_page : prev_page, //si toco en el Boton next, mi current page va a ser la siguiente porque voy para adelante, sino la de atras
+        games: [...state.gamesBackup].splice(first_index, games_per_page), 
+        currentPage: action.payload === "next"? next_page : prev_page, 
       }
 
     case GENRE_FILTER:
-    const filterByGenre = [...state.gamesBackup].filter((game) => game.genres.includes(action.payload)) //al backup para que aplique a toda la totalidad de games todo el tiempo
+    const filterByGenre = [...state.gamesBackup].filter((game) => game.genres.includes(action.payload)) 
     return{
       ...state,
-      games: filterByGenre.splice(0, games_per_page), //splice para mantener con el paginado
-      gamesFiltered: filterByGenre, //va a tener un backup de los juegos filtrados
+      games: filterByGenre.splice(0, games_per_page),
+      gamesFiltered: filterByGenre,
       filter: true,
     }
     
@@ -80,7 +79,7 @@ const rootReducer = (state = initialState, action) => {
         if(action.payload === "asc"){
           if(prev.name.toLowerCase() > next.name.toLowerCase()) return 1;
           if(prev.name.toLowerCase() < next.name.toLowerCase()) return -1;
-          return 0; //son iguales
+          return 0;
         }
         if(action.payload === "desc"){
           if(prev.name.toLowerCase() > next.name.toLowerCase()) return -1;
@@ -93,11 +92,11 @@ const rootReducer = (state = initialState, action) => {
           if(prev.rating < next.rating) return 1;
           return 0;
         }
-      }) //al backup para que aplique a toda la totalidad de games todo el tiempo
+      }) 
     return{
       ...state,
-      games: [...orderedGames].splice(0, games_per_page), //splice para mantener con el paginado
-      gamesBackup: orderedGames, //va a tener un backup de los juegos filtrados
+      games: [...orderedGames].splice(0, games_per_page), 
+      gamesBackup: orderedGames, 
       currentPage: 0,
     }
 
@@ -117,8 +116,8 @@ const rootReducer = (state = initialState, action) => {
     case GET_GAME_BY_NAME:
     return{
       ...state,
-      games: [...action.payload].splice(0, games_per_page), //splice para mantener con el paginado
-      gamesFiltered: action.payload, //va a tener un backup de los juegos filtrados
+      games: [...action.payload].splice(0, games_per_page), 
+      gamesFiltered: action.payload,
       filter: true,
     }
     

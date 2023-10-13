@@ -5,7 +5,6 @@ import video from "../../assets/video.mp4";
 const Landing = () => {
     return (
         <div className={style.landing}>
-            {/* {<img className={style.sticker} src={"./src/assets/pngegg (1).png"}/>} */}
             <video
              src={video}
              className={style.video}

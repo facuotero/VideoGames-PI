@@ -5,12 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getGenres } from "../../redux/action";
 
 const Form = () => {
-  /* Controlar un Formulario
-  Formulario y Estado tienen que tener en todo momento lo mismo escrito en cada una de sus propiedades. Formulario reflejo del estado.
-  Para eso le ponemos el value a los input. Para que sean un reflejo del valor del estado.
-  Para cambiar el input tengo que cambiar el estado.
-  */
-  const genres = useSelector((state) => state.genres); //generos del estado global
+
+  const genres = useSelector((state) => state.genres);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,7 +24,6 @@ const Form = () => {
     genres: [],
   });
 
-  //Estado para manejar las validaciones
   const [errors, setErrors] = useState({
     name: "",
     description: "*",
@@ -39,7 +34,6 @@ const Form = () => {
     genres: [],
   });
 
-  //cuando haga un cambio en mi estado, va a validar si lo que estoy escribiendo es correcto
   const validate = (form) => {
     const hasSymbols = /[^a-zA-Z0-9\s]+/;
     const urlValidation = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
@@ -69,9 +63,7 @@ const Form = () => {
     setErrors({ ...newErrors });
   };
 
-  /*Tengo que leer lo que estoy escribiendo y guardarlo en la propiedad del estado que corresponda. El event me trae la info que 
-  me interesa. Me dice dónde escribí y viene en su propiedad target. event.target.name(quien escribio) event.target.value(lo que
-  escribio). Por eso le ponemos names a los inputs*/
+
   const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
@@ -88,17 +80,16 @@ const Form = () => {
       setForm({
         ...form,
         [property]: value,
-        //[property] estamos diciendo que el nombre de la propiedad se determinara dinamicamente segun el valor de la variable property.
-        //tecnica para actualizar las propiedades de un objeto JS de manera dinámica.
+   
       });
     }
     validate({
       ...form,
-      [property]: value, //demore lo mismo en validar que lo que se carga el estado para que vaya valiando a la par que se escribe
+      [property]: value, 
     });
   };
 
-  const removeGenre = (genre) => {//*para eliminar un genero*/
+  const removeGenre = (genre) => {
   let genresAux = form.genres.filter((g) => g !== genre);
   setForm({
     ...form,
@@ -106,9 +97,8 @@ const Form = () => {
 });
 };
 
-  //El estado global redux no tiene participacion en la operación
   const submitHandler = (event) => {
-    event.preventDefault(); //para evitar que se me haga un submit por defecto
+    event.preventDefault();
     axios
       .post("http://localhost:3001/videogames", form)
       .then((res) => {

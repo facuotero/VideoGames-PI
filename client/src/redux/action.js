@@ -8,7 +8,6 @@ export const GENRE_FILTER = "GENRE_FILTER";
 export const GET_GENRES = "GET_GENRES";
 export const ORDER = "ORDER";
 
-//Request needed
 export const getAllGames = () => {
   return async function (dispatch) {
     try {
@@ -25,7 +24,6 @@ export const getAllGames = () => {
 };
 
 export const paginateVideogames = (order) => {
-  //identificador que me dice para donde estoy paginando
   return async function (dispatch) {
     try {
       dispatch({ type: PAGINATE, payload: order });
@@ -49,7 +47,6 @@ export const getGenres = () => {
   };
 };
 
-//Request needed
 export const getGameByName = (name) => {
   return async function (dispatch) {
     try {
@@ -92,7 +89,6 @@ export const orderCriteria = (order) => {
   };
 };
 
-//No request needed
 export const filterBySource = (source) => {
   return async function (dispatch) {
     try {
@@ -102,9 +98,3 @@ export const filterBySource = (source) => {
     }
   };
 };
-
-//Retornan una funcion
-//Hacen su request o no
-//Sacan la info que les importa o no
-//Hacen su dispatch con el type y payload correspondiente
-//Dispatch pra modificar el estado global.
