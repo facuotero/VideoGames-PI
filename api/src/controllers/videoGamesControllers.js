@@ -63,12 +63,12 @@ const findById = async (id, source) => {
       include: { model: Genre, attributes: ["name"] },
     });
     if (dbGame) {
-      dbGame.toJSON();//Por qué?
+      dbGame.toJSON();
       return {
         id: dbGame.id,
         name: dbGame.name,
         platforms: dbGame.platforms,
-        genres: dbGame.Genres?.map(genre => genre.name),
+        genres: dbGame.Genres?.map(genre => genre.map(g => g.name)),
         image: dbGame.image,
         released: dbGame.released,
         rating: dbGame.rating,

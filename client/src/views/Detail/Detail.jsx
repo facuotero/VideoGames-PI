@@ -39,9 +39,9 @@ const Detail = () => {
           />
           <p>{game.id}</p>
           <p className={style.platforms}>
-            {game.platforms.join(", ")}
+            {game.platforms}
           </p>
-          <p>{game.genres.join(", ")}</p>
+          <p>{game.genres}</p>
           <p>{game.released}</p>
           <p className={style.rating}>{"★"}{game.rating}</p>
           <p className={style.description}>

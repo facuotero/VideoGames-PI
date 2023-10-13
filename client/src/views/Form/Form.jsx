@@ -31,10 +31,10 @@ const Form = () => {
   //Estado para manejar las validaciones
   const [errors, setErrors] = useState({
     name: "",
-    description: "",
-    platforms: "",
+    description: "*",
+    platforms: "*",
     image: "",
-    released: "",
+    released: "*",
     rating: "",
     genres: [],
   });
@@ -54,13 +54,17 @@ const Form = () => {
       newErrors.image = "Invalid URL";
     }
 
-    if (form.rating < 1 || form.rating > 5) {
-      newErrors.rating = "Rating must be between 1-5";
+    if (form.rating < 1 || form.rating > 10) {
+      newErrors.rating = "Rating must be between 1-10";
+    }
+    if (hasSymbols.test(form.rating)) {
+      newErrors.rating = "Rating must be a number";
     }
 
     if (form.name === "") newErrors.name = "";
     if (form.image === "") newErrors.image = "";
     if (form.rating === "") newErrors.rating = "";
+    
 
     setErrors({ ...newErrors });
   };
@@ -93,19 +97,6 @@ const Form = () => {
       [property]: value, //demore lo mismo en validar que lo que se carga el estado para que vaya valiando a la par que se escribe
     });
   };
-
-  // const disabledButton = () => {
-  //   let disabledAux = true;
-  //   for(let key in errors){
-  //     if(errors[key] === ""){
-  //       disabledAux = false;
-  //     }else{
-  //       disabledAux = true;
-  //       break;
-  //     }
-  //   }
-  //   return disabledAux;
-  // }
 
   const removeGenre = (genre) => {//*para eliminar un genero*/
   let genresAux = form.genres.filter((g) => g !== genre);
@@ -193,7 +184,7 @@ const Form = () => {
       {form.genres && <span>{form.genres.map((genreToRemove) =>(
         <span key={genreToRemove} className={style.genres}>
           {genreToRemove}
-          <button type="button" onClick={() => removeGenre(genreToRemove)}>X</button>
+          <button type="button" onClick={() => removeGenre(genreToRemove)} className={style.deleteButton}>X</button>
         </span>
       )
       )}</span>}

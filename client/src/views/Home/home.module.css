@@ -3,17 +3,46 @@
         flex-direction: row;
         justify-content: center;
         padding: 10px;
+        margin-top: 20px;
         background-color: #272640;
         box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
     }
-    option{
+   .space{
+    margin-right: 20px;
+    margin-top: 20px;
+   }
+    .option{
         font-family: 'Press Start 2P', sans-serif;
         font-size: 1.5rem;
         color: black;
         background-color:rgba(0, 255, 128, 0.309);
-        text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
-        
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);        
       }
+    .select{
+      font-family: 'Press Start 2P', sans-serif;
+      font-size: 1.5rem;
+      color: black;
+      background-color:rgba(0, 255, 128, 0.309);
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+    }
+    .genres{
+      font-family: 'Press Start 2P', sans-serif;
+      font-size: 1.5rem;
+      width: 200px;
+      color: black;
+      background-color:rgba(0, 255, 128, 0.309);
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+    }
+    .rating {
+        font-family: 'Press Start 2P', sans-serif;
+        justify-items: center;
+        font-size: 1.5rem;
+        width: 100px;
+        text-align: center;
+        color: black;
+        background-color:rgba(0, 255, 128, 0.309);
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+    }
       h1{
         color: #6fe9b4;
         text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
@@ -24,5 +53,17 @@
         justify-content: center;
         padding: 10px;
         background-color: #272640;
-        
+    }
+    .pButton {
+        font-family: 'Press Start 2P', sans-serif;
+        font-size: 1.0rem;
+        color: black;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .pButton:hover{
+      color: #6fe9b4;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
     }

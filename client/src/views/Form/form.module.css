@@ -72,15 +72,11 @@
     height: 100px; /* Alto deseado */
     margin-bottom: 20px;
   }
-  input ::content{
-    background-color: #3e2b57;
-  }
+ 
   input:hover{
     background-color: #3e2b57;
   }
-  .input:hover{
-    background-color: #3e2b57;
-  }
+ 
   .select:hover{
     background-color: #3e2b57;
   }
@@ -119,4 +115,25 @@
     color: red;
     font-size: 14px;
     margin-top: 5px;
+  }
+  .genres{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .deleteButton{
+    background-color: #065a60;
+    color: #312244;
+    margin-left: 10px ;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.7)
+   }
+   .deleteButton:hover {
+    background-color: #065a60;
+    color: #6fe9b4;
   }

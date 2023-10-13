@@ -1,5 +1,4 @@
 .container{
-    border: 1px solid black;
     padding: 20px;
     display: flex;
     justify-content: center;
@@ -7,6 +6,5 @@
     border-radius: 15px;
     flex-wrap: wrap;
     gap:1em;
-    background-color: #312244;
     
 }

@@ -1,5 +1,6 @@
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
 import { useEffect } from "react";
+import SearchBar from "../../components/SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import {
   genreFilter,
@@ -40,30 +41,33 @@ const Home = () => {
   return (
     <div>
       <div className={style.filters}>
-        <select onChange={sourceFilter}>
+        <div className={style.space}>
+        <select onChange={sourceFilter} className={style.select}>
           <option value="all">ALL</option>
           <option value="db">DB</option>
           <option value="api">API</option>
         </select>
-        <select onClick={orderGames}>
+        <select onClick={orderGames} className={style.rating}>
           <option value="rating">{"★"}</option>
           <option value="asc">A-Z</option>
           <option value="desc">Z-A</option>
         </select>
-        <select onChange={filterByGenres} name="genres">
+        <select onChange={filterByGenres} name="genres" className={style.genres}>
           {genres.map((genre) => (
             <option key={genre.id} value={genre.name}>
               {genre}
             </option>
           ))}
         </select>
+        </div>
+          <SearchBar /> 
       </div >
       <div className={style.paginateButtons}>
         <button onClick={paginate} name="prev">
-          Prev
+          <p className={style.pButton}>Prev</p>
         </button>{" "}
         <button onClick={paginate} name="next">
-          Next
+         <p className={style.pButton}>Next</p>
         </button>
       </div>
       <h1>Rawg Videogames</h1>
