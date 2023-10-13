@@ -40,7 +40,7 @@ const Home = () => {
   return (
     <div>
       <div className={style.filters}>
-        <select onClick={sourceFilter} className={style.filters}>
+        <select onChange={sourceFilter}>
           <option value="all">ALL</option>
           <option value="db">DB</option>
           <option value="api">API</option>
@@ -57,8 +57,8 @@ const Home = () => {
             </option>
           ))}
         </select>
-      </div>
-      <div>
+      </div >
+      <div className={style.paginateButtons}>
         <button onClick={paginate} name="prev">
           Prev
         </button>{" "}

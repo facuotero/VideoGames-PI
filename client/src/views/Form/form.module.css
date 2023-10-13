@@ -2,6 +2,8 @@
    display: block;
     max-width: 600px;
     margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
     padding: 20px;
     background-color: #065a60;
     border-radius: 10px;
@@ -70,7 +72,9 @@
     height: 100px; /* Alto deseado */
     margin-bottom: 20px;
   }
-
+  input ::content{
+    background-color: #3e2b57;
+  }
   input:hover{
     background-color: #3e2b57;
   }

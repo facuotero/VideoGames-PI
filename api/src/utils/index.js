@@ -15,6 +15,7 @@ const cleanArray = (dbGame) =>
       genres: game.genres.map(genre => genre.name),
       image: game.background_image,
       released: game.released,
+      rating: game.rating,
       description: game.description,
       created: false,
     };

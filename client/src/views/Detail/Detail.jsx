@@ -26,7 +26,7 @@ const Detail = () => {
 
   return (
     <div>
-      <h1 className={style.detailTitle}>Detail</h1>
+      <h1 className={style.detailTitle}>Game Detail</h1>
       {isLoading ? (
         <p className={style.loading}>Loading...</p> // Muestra el mensaje de "Loading" mientras se cargan los datos
       ) : (
@@ -39,9 +39,9 @@ const Detail = () => {
           />
           <p>{game.id}</p>
           <p className={style.platforms}>
-            {game.platforms}
+            {game.platforms.join(", ")}
           </p>
-          <p>{game.genres}</p>
+          <p>{game.genres.join(", ")}</p>
           <p>{game.released}</p>
           <p className={style.rating}>{"★"}{game.rating}</p>
           <p className={style.description}>

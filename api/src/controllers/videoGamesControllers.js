@@ -60,7 +60,7 @@ const findAllVideogames = async () => {
 const findById = async (id, source) => {
   if (source === "db") {
     let dbGame = await Videogame.findByPk(id, {
-      include: { model: Genre, attribute: ["name"] },
+      include: { model: Genre, attributes: ["name"] },
     });
     if (dbGame) {
       dbGame.toJSON();//Por qué?

@@ -88,8 +88,9 @@ const rootReducer = (state = initialState, action) => {
           return 0;
         }
         if(action.payload === "rating"){
-          if(prev.rating > prev.rating) return 1;
-          if(prev.rating < prev.rating) return -1;
+          console.log(prev, next)
+          if(prev.rating > next.rating) return -1;
+          if(prev.rating < next.rating) return 1;
           return 0;
         }
       }) //al backup para que aplique a toda la totalidad de games todo el tiempo

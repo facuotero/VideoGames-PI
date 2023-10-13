@@ -1,10 +1,10 @@
 .filters{
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: center;
         padding: 10px;
-        background-color:rgba(0, 255, 128, 0.309);
-        text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+        background-color: #272640;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
     }
     option{
         font-family: 'Press Start 2P', sans-serif;
@@ -18,3 +18,11 @@
         color: #6fe9b4;
         text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
       }
+    .paginateButtons{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 10px;
+        background-color: #272640;
+        
+    }

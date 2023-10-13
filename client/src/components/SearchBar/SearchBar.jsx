@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getGameByName } from "../../redux/action";
 import { useDispatch } from "react-redux";
+import style from "./SearchBar.module.css";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,8 @@ const SearchBar = () => {
   };
 
   return (
-    <div>
+    <div className={style.searchBar}
+    >
       <input
         type="search"
         placeholder="Search by Name"
